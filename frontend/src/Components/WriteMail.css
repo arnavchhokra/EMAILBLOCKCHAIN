@@ -1,0 +1,45 @@
+.WriteMail {
+  position: absolute;
+  bottom: 1vh;
+  right: 2vw;
+  width: 30vw;
+  height: 40vh;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 5px;
+  
+}
+
+.WriteMail input[type="text"],
+.WriteMail textarea {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  height: 4vh;
+  font-size: 15px;
+}
+#content {
+  height: 25vh;
+}
+
+.WriteMail-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  
+}
+
+@media (max-width: 765px) {
+  .WriteMail {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vw;
+    height: calc(100vh - 1rem - 12vh);
+  }
+}

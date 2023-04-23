@@ -1,0 +1,40 @@
+.LeftBar {
+  width: calc(1rem + 10vw);
+  margin-top: 10px;
+}
+
+.LeftBar-Container {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}
+.LeftBar-Container a {
+  color: white;
+  text-decoration: none;
+  margin-left: 10px;
+}
+#compose {
+  padding: 5px;
+  border: none;
+  color: white;
+  background: linear-gradient(to right, rgb(88, 41, 190), lightblue);
+  font-weight: 500;
+  border: none;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 3px;
+  font-size: calc(0.7rem + 0.1vw);
+}
+
+@media (max-width: 765px) {
+  #compose {
+    display: none;
+  }
+  .LeftBar a {
+    display: none;
+  }
+  /*
+  .LeftBar{
+    display:none;}
+    */
+}
