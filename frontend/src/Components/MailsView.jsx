@@ -3,14 +3,18 @@ import "./MailsView.css";
 import Web3 from "web3";
 import { useState, useEffect } from "react";
 import { EMAILBLOCK } from "../abi/abi";
+import CryptoJS from "crypto-js";
+import forge from "node-forge";
 
 function MailsView() {
   const [address, setaddress] = useState("");
   const [web3, setWeb3] = useState(null);
-  const contractAddress = "0x937f1002ce56A94D753C44eA85D27413168d474b";
+  const contractAddress = "0xDD883BAB25a50D499b5dD0D14A31a65863027647";
   const [contract, setContract] = useState(null);
   const [storedmails, setStoredMails] = useState([]);
   const [body, setBody] = useState("");
+  const [decryptedMessages, setDecryptedMessages] = useState([]);
+
   var accounts;
   useEffect(() => {
     const fetchdata = async () => {
@@ -21,31 +25,6 @@ function MailsView() {
       setContract(EmailContract);
       const accounts = await web3.eth.getAccounts();
       setaddress(accounts[0]);
-      //getall();
-      /*  EmailContract.events.NewEmailSent(
-        {
-          fromBlock: 0,
-          toBlock: "latest",
-        },
-        function (error, event) {
-          if (!error) {
-            console.log(event.returnValues.recipient);
-            console.log(event.returnValues.sender);
-            console.log(event.returnValues.subject);
-            console.log(event.returnValues.body);
-
-              const newEmail = {
-                sender: event.returnValues.sender,
-                timestamp: event.returnValues.timestamp,
-                content: event.returnValues.body,
-              };
-            
-
-            // update the storedmails state with the new email object
-            setStoredMails((prevMails) => [...prevMails, newEmail]);
-          }
-        }
-      );*/
     };
     fetchdata();
     // console.log(address);
@@ -57,8 +36,38 @@ function MailsView() {
     var storedmail = [];
     storedmail = await contract.methods.getEmails().call({ from: accounts[0] });
     setStoredMails(storedmail);
-    console.log(storedmail);
   };
+
+  const changebody = async (_body, _issecure, _reciever) => {
+    if (contract) {
+      const accounts = await web3.eth.getAccounts();
+      if (_issecure) {
+        try {
+          const privatekey = await contract.methods
+            .getprivatekey()
+            .call({ from: accounts[0] });
+          const privateKey = forge.pki.privateKeyFromPem(privatekey);
+          const encryptedMessage = forge.util.decode64(_body);
+          const decryptedMessage = privateKey.decrypt(
+            encryptedMessage,
+            "RSA-OAEP",
+            {
+              md: forge.md.sha256.create(),
+            }
+          );
+          var msg = decryptedMessage;
+          console.log(msg);
+          return msg;
+        } catch (error) {
+          console.log(error);
+          console.log("error detected");
+        }
+      } else {
+        console.log("not true");
+      }
+    }
+  };
+
   const changetimestamp = (timestamp) => {
     const date = new Date(timestamp * 1000);
     const year = date.getFullYear();
@@ -66,6 +75,20 @@ function MailsView() {
     const day = ("0" + date.getDate()).slice(-2);
     return `${day}-${month}-${year}`;
   };
+
+  useEffect(() => {
+    const decryptMessages = async () => {
+      const decryptedMessages = await Promise.all(
+        storedmails.map((mail) =>
+          changebody(mail.content, mail.isSecure, mail.sender)
+        )
+      );
+      setDecryptedMessages(decryptedMessages);
+    };
+    decryptMessages();
+  }, [storedmails]);
+
+
 
   return (
     <div className="MailsView">
@@ -90,7 +113,9 @@ function MailsView() {
                 <div className="MailTitle">
                   {changetimestamp(mails.timestamp)}
                 </div>
-                <div className="MailContent">{mails.content}</div>
+                <div className="MailContent">
+                  {decryptedMessages[index]}
+                </div>
               </div>
             </a>
           ))}

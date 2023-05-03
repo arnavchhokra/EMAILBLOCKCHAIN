@@ -12,6 +12,7 @@ function LeftBar() {
   const handleCloseClick = () => {
     setComposeOpen(false);
   };
+  
 
   return (
     <div className="LeftBar">

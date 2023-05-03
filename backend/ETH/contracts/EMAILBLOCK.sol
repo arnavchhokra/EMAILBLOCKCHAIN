@@ -8,16 +8,37 @@ contract EMAILBLOCK{
         address reciever;
         uint timestamp;
         string content;
+        bool isSecure;
     }
     
-    mapping(address=>mail[])  public  inbox;
+    mapping(address=>mail[]) private inbox;
     //mail[] mails;
+    mapping(address=>string) public publickey;
+    mapping(address=>string) private privatekey;
 
-    function sendEmail(address _reciever, string memory _body) public
+    function setpublickey(string memory _pubkey) public
+    {
+        publickey[msg.sender] = _pubkey;
+    }
+    function getpublickey(address _reciever) public view returns(string memory)
+    {
+        return publickey[_reciever];
+    }
+
+    function setprivatekey(string memory _prikey) public{
+        privatekey[msg.sender] = _prikey;
+    }
+
+    function getprivatekey() public view returns(string memory){
+        return privatekey[msg.sender];
+    }
+
+    
+    function sendEmail(address _reciever, string memory _body, bool _issecure) public
     {
        // require(publicKeys[_reciever].length > 0, "Recipient private key not set");
         mail memory newmail = mail({ sender: msg.sender,
-        reciever : _reciever, timestamp: block.timestamp, content: _body});
+        reciever : _reciever, timestamp: block.timestamp, content: _body, isSecure: _issecure });
         inbox[_reciever].push(newmail);
     }
 

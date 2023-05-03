@@ -6,32 +6,72 @@ export const EMAILBLOCK = [
         name: "",
         type: "address",
       },
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
     ],
-    name: "inbox",
+    name: "publickey",
     outputs: [
       {
-        internalType: "address",
-        name: "sender",
-        type: "address",
+        internalType: "string",
+        name: "",
+        type: "string",
       },
-      {
-        internalType: "address",
-        name: "reciever",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "timestamp",
-        type: "uint256",
-      },
+    ],
+    stateMutability: "view",
+    type: "function",
+    constant: true,
+  },
+  {
+    inputs: [
       {
         internalType: "string",
-        name: "content",
+        name: "_pubkey",
+        type: "string",
+      },
+    ],
+    name: "setpublickey",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_reciever",
+        type: "address",
+      },
+    ],
+    name: "getpublickey",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+    constant: true,
+  },
+  {
+    inputs: [
+      {
+        internalType: "string",
+        name: "_prikey",
+        type: "string",
+      },
+    ],
+    name: "setprivatekey",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getprivatekey",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
         type: "string",
       },
     ],
@@ -50,6 +90,11 @@ export const EMAILBLOCK = [
         internalType: "string",
         name: "_body",
         type: "string",
+      },
+      {
+        internalType: "bool",
+        name: "_issecure",
+        type: "bool",
       },
     ],
     name: "sendEmail",
@@ -82,6 +127,11 @@ export const EMAILBLOCK = [
             internalType: "string",
             name: "content",
             type: "string",
+          },
+          {
+            internalType: "bool",
+            name: "isSecure",
+            type: "bool",
           },
         ],
         internalType: "struct EMAILBLOCK.mail[]",
@@ -124,6 +174,11 @@ export const EMAILBLOCK = [
             internalType: "string",
             name: "content",
             type: "string",
+          },
+          {
+            internalType: "bool",
+            name: "isSecure",
+            type: "bool",
           },
         ],
         internalType: "struct EMAILBLOCK.mail",
