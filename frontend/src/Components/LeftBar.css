@@ -27,12 +27,18 @@
 }
 
 @media (max-width: 765px) {
-  #compose {
-    display: none;
-  }
+
   .LeftBar a {
-    display: none;
   }
+  .LeftBar-Container{
+    display:flex;
+    flex-direction: row;
+    width:100vw !important;
+    justify-content: center;
+    margin-top: 20px;;
+
+  }
+
   /*
   .LeftBar{
     display:none;}

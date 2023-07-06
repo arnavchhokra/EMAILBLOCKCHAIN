@@ -64,6 +64,26 @@
   color: white;
 }
 
+#Reponsive-Nav{
+  position: absolute;
+  display: none;
+  flex-direction: column;
+  align-items: left;
+  right:0vw;
+  top:0;
+  gap:5vh;
+  height: 100vh;
+  width:40px;
+  padding:40px;
+  background-color: rgb(44, 44, 44);
+}
+#Reponsive-Nav a{
+  text-decoration: none;
+  color:white;
+  border-bottom: 1px solid white;
+}
+
+
 @media (max-width: 500px) {
   #Navbar-Middle {
     display: none;
@@ -78,4 +98,10 @@
   .Navbar-Container {
     justify-content: center;
   }
+}
+
+.MailSender{
+  text-overflow: ellipsis; /* Required for text-overflow to do anything */
+  white-space: nowrap;
+  overflow: hidden;
 }

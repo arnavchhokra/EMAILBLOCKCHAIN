@@ -15,6 +15,6 @@
 body,
 html,
 head {
-  /* background: linear-gradient(to bottom right, #181c24, #182c4c) no-repeat
-    center fixed;*/
+   background: linear-gradient(to bottom right, #181c24, #182c4c) no-repeat
+    center fixed;
 }

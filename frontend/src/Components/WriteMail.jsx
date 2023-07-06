@@ -49,8 +49,9 @@ const WriteMail = (props) => {
         setIssecure(false);
         setRecieverkey(reciever);
         alert(
-          "The receiver of this message, is not at threemail. Therefore this message is not secure"
+          "The receiver of this message, is not registered at threemail. Therefore this message is not secure"
         );
+        return body;
       } else {
         console.log("Reciever has keys");
         setIssecure(true);
@@ -81,7 +82,6 @@ const WriteMail = (props) => {
       } else {
         const keyPair = forge.pki.rsa.generateKeyPair({ bits: 2048 });
         // Get the public and private keys in PEM format
-
         const publicKeyPem = forge.pki.publicKeyToPem(keyPair.publicKey);
         const privateKeyPem = forge.pki.privateKeyToPem(keyPair.privateKey);
         console.log(publicKeyPem);
@@ -113,6 +113,7 @@ const WriteMail = (props) => {
     }
   };
 
+  /*
   const check = async () => {
     const keyPair = forge.pki.rsa.generateKeyPair({ bits: 2048 });
 
@@ -145,8 +146,7 @@ const WriteMail = (props) => {
 
     console.log("Decrypted Message:");
     console.log(decryptedMessage);
-  };
-
+  };*/
 
   return (
     <div className="WriteMail">
@@ -172,7 +172,6 @@ const WriteMail = (props) => {
       <div className="WriteMail-buttons">
         <button onClick={setkeys}>encrypt</button>
         <button onClick={add}>Send</button>
-        <button onClick={check}>check</button>
         <button onClick={props.handleCloseClick}>Close</button>
       </div>
     </div>
