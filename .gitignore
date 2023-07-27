@@ -1,2 +1,5 @@
 
 backend/ETH/.env
+
+# Local Netlify folder
+.netlify

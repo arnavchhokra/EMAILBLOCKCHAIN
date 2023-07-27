@@ -13,7 +13,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="Home/" element={<PreLoginHome />} />
+          <Route path="/" element={<PreLoginHome />} />
           <Route path="user/" element={<PostLoginHome />} />
           <Route path="user/compose/" element={<WriteMail />} />
           <Route path="/user/mail/:index" element={<PostLoginHome />} />
