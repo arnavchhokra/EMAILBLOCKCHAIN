@@ -1,3 +1,3 @@
 # EMAIL-BLOCKCHAIN
  
-Deployment Link https://emailblockchain.vercel.app/Home
+Deployment Link https://emailblockchain.vercel.app
