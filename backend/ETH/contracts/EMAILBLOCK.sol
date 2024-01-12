@@ -16,6 +16,8 @@ contract EMAILBLOCK{
     mapping(address=>string) public publickey;
     mapping(address=>string) private privatekey;
 
+
+
     function setpublickey(string memory _pubkey) public
     {
         publickey[msg.sender] = _pubkey;
@@ -42,6 +44,8 @@ contract EMAILBLOCK{
         inbox[_reciever].push(newmail);
     }
 
+
+
     function getEmails() public view returns(mail[] memory)
     {
       //  require(privateKeys[msg.sender].length > 0, "Recipient private key not set");
@@ -54,6 +58,8 @@ contract EMAILBLOCK{
         }
         return result;    
     }
+
+
 
     function getEmail(uint num) public view returns(mail memory)
     {
