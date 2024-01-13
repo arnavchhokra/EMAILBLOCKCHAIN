@@ -14,9 +14,6 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<PreLoginHome />} />
-          <Route path="user/" element={<PostLoginHome />} />
-          <Route path="user/compose/" element={<WriteMail />} />
-          <Route path="/user/mail/:index" element={<PostLoginHome />} />
         </Routes>
       </BrowserRouter>
     </div>
