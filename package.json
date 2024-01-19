@@ -3,8 +3,11 @@
     "@truffle/hdwallet-provider": "^2.1.9",
     "dotenv": "^16.0.3"
   },
-  "scripts":{
+  "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
+  },
+  "devDependencies": {
+    "tailwindcss-animate": "^1.0.7"
   }
 }
