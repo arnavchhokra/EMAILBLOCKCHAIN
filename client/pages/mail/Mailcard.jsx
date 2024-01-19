@@ -3,6 +3,8 @@ import Web3 from "web3";
 import { useState, useEffect } from "react";
 import { EMAILBLOCK } from "../abi/abi";
 import forge from "node-forge";
+import { useDispatch, useSelector } from 'react-redux';
+import { setMailContent, setMailSender } from './mailActions';
 
 
 
@@ -72,7 +74,6 @@ function Mailcard() {
             }
           );
           var msg = decryptedMessage;
-          console.log(msg);
           return msg;
         } catch (error) {
           console.log(error);
@@ -92,10 +93,11 @@ function Mailcard() {
     return `${day}-${month}-${year}`;
   };
 
+
+
+
   useEffect(() => {
     const decryptMessages = async () => {
-      console.log(storedmails)
-      console.log("HEYYHOOO")
       const decryptedMessages = await Promise.all(
         storedmails.map((mail) =>
           changebody(mail.content, mail.isSecure, mail.sender)
@@ -106,13 +108,23 @@ function Mailcard() {
     decryptMessages();
   }, [storedmails]);
 
+  const dispatch = useDispatch();
+  const { mailContent, mailSender } = useSelector((state) => state.mail);
+
+  const clicked=(newContent, newSender) => {
+    console.log(newContent)
+    dispatch(setMailContent(newContent));
+    dispatch(setMailSender(newSender));
+  }
+
 
 
   return (
     <div>
       <div style={{width:'95%'}}><button  style={{ marginLeft:'10px',background:'#8952E0', padding:'7px'}}onClick={ getall}>Generate mails</button></div>
     {storedmails.map((mails, index) => (
-    <button key={index} id='mailcardbtn' style={{borderRadius:'5px', marginLeft:'10px', marginRight:'10px', padding:'20px', marginTop:'5px', border:'1px solid grey', textDecoration:'none', maxheight:'150px', width:'95%'}}>
+    <div  key={index} >
+      <button   onClick={()=>{clicked(mails.content,mails.sender)}}  id='mailcardbtn' style={{borderRadius:'5px', marginLeft:'10px', marginRight:'10px', padding:'20px', marginTop:'5px', border:'1px solid grey', textDecoration:'none', maxheight:'150px', width:'95%'}}  >
       <div style={{display:'flex', justifyContent:'space-between', alignContent:'center'}}>
         <span style={{fontSize:'16px', fontWeight:'bold', width:'40%', overflowX:'clip', textOverflow:'clip',  height:'22px',overflowY:'clip'}}>{mails.sender}</span>
         <span style={{fontSize:'12px'}}>                  {changetimestamp(mails.timestamp)}
@@ -122,7 +134,8 @@ function Mailcard() {
         <span style={{fontSize:'14px', textAlign:'left', textOverflow:'ellipsis', height:'40px'}}> {mails.content}
 </span>
       </div>
-    </button>
+      </button>
+    </div>
     ))}
     </div>
  )

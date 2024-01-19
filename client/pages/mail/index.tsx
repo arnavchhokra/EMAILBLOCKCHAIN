@@ -28,6 +28,10 @@ import Web3 from "web3";
 import { useState, useEffect } from "react";
 import { EMAILBLOCK } from "../abi/abi";
 import forge from "node-forge";
+import store from './store';
+import { Provider } from 'react-redux';
+
+import { useSelector } from 'react-redux';
 
 
 const index = ()=> {
@@ -138,6 +142,10 @@ const index = ()=> {
     }
   };
 
+
+  const mailContent = useSelector((state) => state.mail.mailContent);
+  const mailSender = useSelector((state) => state.mail.mailSender);
+
   return (
     <div style={{marginTop:'80px', borderTop:'1px solid grey', marginLeft:'7%', marginRight:'7%', borderLeft:'1px solid grey', borderRight:'1px solid grey', borderBottom:'1px solid grey'}}>
       <ResizablePanelGroup direction='horizontal' className="het">
@@ -154,11 +162,11 @@ const index = ()=> {
         <AvatarFallback style={{borderRadius:'50px', padding:'20px', background:'#8952E0'}}>TM</AvatarFallback>
         </Avatar>
         <div style={{display:'flex',justifyContent:'space-between', alignitems:'center',width:'100%', marginRight:'20px',}}>
-          <span style={{fontWeight:'600', fontSize:'20px', paddingRight:'30%'}}>{accounts[0]}</span>
+          <span style={{fontWeight:'600', fontSize:'20px', paddingRight:'30%'}}>{mailSender}</span>
         </div>
         </div>
         <div style={{padding:'20px', paddingBottom:'60px', borderBottom:'1px solid grey', fontSize:'16px', }}>
-          <span style={{ width:'80%',}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, quaerat quis quae beatae aperiam dolorem magnam fugiat, animi deserunt quo sed tempore molestiae deleniti necessitatibus fugit expedita voluptate error ullam adipisci reprehenderit, modi velit. Veniam, sint non! Facilis rerum eveniet saepe. Fuga necessitatibus vitae natus maxime, id labore blanditiis odio eaque dolor. Veritatis esse praesentium explicabo alias sequi tenetur numquam, adipisci, natus, aspernatur qui eos doloremque? Officiis tempora magni neque cum. Modi doloremque quo, doloribus odit fugiat ipsa maiores fugit deserunt ducimus? Ullam illo provident ut delectus ratione voluptatem incidunt quae accusantium, excepturi deserunt dolorem praesentium saepe, magni architecto quia.</span>
+          <span style={{ width:'80%',}}>{mailContent}</span>
         </div>
         <div className="inp" style={{display:'flex', flexDirection:'column', justifyContent:'center', padding:'20px', borderBottom:'1px solid grey',}}>
           <input         type="text"
