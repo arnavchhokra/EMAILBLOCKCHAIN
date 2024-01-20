@@ -42,7 +42,7 @@ function Index() {
   const [body, setBody] = useState("");
   const [issecure, setIssecure] = useState(false);
   const [address, setaddress] = useState("");
-  const [web3, setWeb3] = useState(null);
+  const [web3, setWeb3] = useState<Web3 | null>(null); // Corrected state type
   const contractAddress = "0xDD883BAB25a50D499b5dD0D14A31a65863027647";
   const [contract, setContract] = useState(null);
   const [recieverkey, setRecieverkey] = useState("");
@@ -59,9 +59,10 @@ function Index() {
 
   useEffect(() => {
     const fetchdata = async () => {
-      if (typeof window.ethereum !== "undefined") {
-        await window.ethereum.enable();
-        const web3 = new Web3(window.ethereum);
+      const win = window as WindowWithEthereum;
+      if (typeof win.ethereum !== "undefined") {
+        await win.ethereum.enable();
+        const web3 = new Web3(win.ethereum);
         setWeb3(web3);
         const EmailContract = new web3.eth.Contract(
           EMAILBLOCK,

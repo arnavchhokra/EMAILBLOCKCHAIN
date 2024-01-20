@@ -25,3 +25,4 @@ export const reducer = (state: State = initialState, action: MailActionTypes): S
   }
 };
 
+export default reducer;

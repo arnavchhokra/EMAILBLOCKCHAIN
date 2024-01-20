@@ -9,7 +9,7 @@ import {initialState} from "./mail/reducer"
 import store from "./mail/store"
 import React, { createContext, useContext, useReducer } from 'react';
 
-export const MailContext = createContext();
+export const MailContext = createContext(undefined);
 
 const MailProvider = ({ children }) => {
   const [state, dispatch] = useReducer(mailReducer, initialState);

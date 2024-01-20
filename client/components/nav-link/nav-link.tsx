@@ -19,18 +19,21 @@ interface WindowWithEthereum extends Window {
 export const NavLink = forwardRef<NavLinkProps, 'a'>((props, ref) => {
   const { href, type, isActive, ...rest } = props
   const [address, setaddress] = useState("");
-  const [web3, setWeb3] = useState(null);
+  const [web3, setWeb3] = useState<Web3 | null>(null); // Corrected state type
 
-  const win = window as WindowWithEthereum;
+
 
   const connectToWeb3 = async () => {
-    if (typeof win.ethereum !== "undefined") {
+    if (typeof window !== "undefined") {
+      const win = window as WindowWithEthereum;
+      if (win.ethereum) {
       await win.ethereum.enable();
       const web3 = new Web3(win.ethereum);
       setWeb3(web3);
       const accounts = await web3.eth.getAccounts();
       setaddress(accounts[0]);
       window.location.href = "/mail";
+      }
     } else {
       alert("Please install MetaMask to use this application");
     }

@@ -54,7 +54,8 @@ import faq from 'data/faq'
 import testimonials from 'data/testimonials'
 import pricing from 'data/pricing'
 
-import Web3 from "web3";
+import Web3 from 'web3';
+import RegisteredSubscription  from 'web3'
 import { useState } from "react";
 
 
@@ -85,19 +86,18 @@ interface WindowWithEthereum extends Window {
 
 const HeroSection: React.FC = () => {
   const [address, setaddress] = useState("");
-  const [web3, setWeb3] = useState(null);
-
-  const win = window as WindowWithEthereum;
-
-
+  const [web3, setWeb3] = useState<Web3 | null>(null); // Corrected state type
   const connectToWeb3 = async () => {
-    if (typeof win.ethereum !== "undefined") {
+
+    if (typeof window !== "undefined") {
+      const win = window as WindowWithEthereum;
+      if (win.ethereum) {
       await win.ethereum.enable();
       const web3 = new Web3(win.ethereum);
       setWeb3(web3);
       const accounts = await web3.eth.getAccounts();
       setaddress(accounts[0]);
-      window.location.href = "/mail";
+      window.location.href = "/mail";}
     } else {
       alert("Please install MetaMask to use this application");
     }
