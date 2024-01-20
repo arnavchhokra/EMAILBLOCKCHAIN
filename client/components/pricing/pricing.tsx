@@ -39,27 +39,27 @@ export const Pricing: React.FC<PricingProps> = (props) => {
         <SectionTitle title={title} description={description}></SectionTitle>
 
         <SimpleGrid columns={[1, null, 3]} spacing={4}>
-          {plans?.map((plan) => (
+          {plans?.map((plan, index) => (
             <PricingBox
-              key={plan.id}
-              title={plan.title}
-              description={plan.description}
-              price={plan.price}
-              sx={
-                plan.isRecommended
-                  ? {
+            key={`${plan.id}-${index}`}
+            title={plan.title}
+            description={plan.description}
+            price={plan.price}
+            sx={
+              plan.isRecommended
+                ? {
+                    borderColor: 'primary.500',
+                    _dark: {
                       borderColor: 'primary.500',
-                      _dark: {
-                        borderColor: 'primary.500',
-                        bg: 'blackAlpha.300',
-                      },
-                    }
-                  : {}
-              }
+                      bg: 'blackAlpha.300',
+                    },
+                  }
+                : {}
+            }
             >
               <PricingFeatures>
                 {plan.features.map((feature, i) =>
-                  feature ? <PricingFeature key={i} {...feature} /> : <br />
+                  feature ? <PricingFeature key={i} {...feature} /> : <br key={i} />
                 )}
               </PricingFeatures>
               <ButtonLink colorScheme="primary" {...plan.action}>
