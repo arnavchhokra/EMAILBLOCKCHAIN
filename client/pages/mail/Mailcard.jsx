@@ -78,7 +78,7 @@ function Mailcard() {
           console.log("error detected");
         }
       } else {
-        console.log("not true");
+        return _body;
       }
     }
   };
@@ -133,7 +133,7 @@ function Mailcard() {
 </span>
       </div>
       <div style={{marginTop:'5px', textAlign:'left', height:'30px', textOverflow:'clip', overflowY:'clip'}}>
-        <span style={{fontSize:'14px', textAlign:'left', textOverflow:'ellipsis', height:'40px'}}> {mails.content}
+        <span style={{fontSize:'14px', textAlign:'left', textOverflow:'ellipsis', height:'40px'}}>{decryptedMessages[index]}
 </span>
       </div>
       </button>
