@@ -25,6 +25,7 @@ function Mailcard() {
   const [decryptedMessages, setDecryptedMessages] = useState([]);
 
   var accounts;
+
   useEffect(() => {
     const fetchdata = async () => {
        const web3 = new Web3(window.ethereum);

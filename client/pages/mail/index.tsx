@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/command"
 
 
-import Mailcard from './mailcard';
+import Mailcard from './Mailcard';
 import store from './store';
 
 
@@ -44,9 +44,9 @@ function Index() {
   const [address, setaddress] = useState("");
   const [web3, setWeb3] = useState<Web3 | null>(null); // Corrected state type
   const contractAddress = "0xDD883BAB25a50D499b5dD0D14A31a65863027647";
-  const [contract, setContract] = useState(null);
+  const [contract, setContract] = useState<any | null>(null);
   const [recieverkey, setRecieverkey] = useState("");
-  const [accounts, setAccounts] = useState([]);
+  const [accounts, setAccounts] = useState<string[]>([]); // Explicitly define the type as string[]
   const [bodyencrypt, setBodyencrypt] = useState("");
 
 
@@ -139,7 +139,7 @@ function Index() {
   };
 
   const add = async () => {
-    if (contract) {
+    if (contract && web3) {
       const content = await getrecieverkey();
       console.log(content);
       const accounts = await web3.eth.getAccounts();
@@ -187,7 +187,7 @@ function Index() {
       <ResizableHandle withHandle  />
       <ResizablePanel  style={{borderLeft:'1px solid grey'}} defaultSize={30}>
         <div style={{display:'flex', paddingLeft:'20px', alignItems:'center', paddingTop:'10px', gap:'20px', borderBottom:'1px solid grey', paddingBottom:'10px'}}>
-        <div style={{display:'flex',justifyContent:'space-between', alignitems:'center',width:'100%', marginRight:'20px',}}>
+        <div style={{display:'flex',justifyContent:'space-between', alignContent:'center',width:'100%', marginRight:'20px',}}>
           <span style={{fontWeight:'600', fontSize:'20px', paddingRight:'30%'}}>{mailSender}</span>
         </div>
         </div>

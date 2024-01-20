@@ -7,9 +7,27 @@ import theme from '../theme'
 import mailReducer from './mail/reducer';
 import {initialState} from "./mail/reducer"
 import store from "./mail/store"
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { createContext, useContext, useReducer, ReactNode } from 'react';
 
-export const MailContext = createContext(undefined);
+
+export interface YourStateType {
+  mailContent: string;
+  mailSender: string;
+  // Add other properties as needed
+}
+interface MailContextProps {
+  state: YourStateType;
+  dispatch: React.Dispatch<any>; // Update this with your actual action types
+}
+
+
+export const MailContext = createContext<MailContextProps | undefined>(undefined);
+
+interface MailProviderProps {
+  children: ReactNode;
+}
+
+
 
 const MailProvider = ({ children }) => {
   const [state, dispatch] = useReducer(mailReducer, initialState);
