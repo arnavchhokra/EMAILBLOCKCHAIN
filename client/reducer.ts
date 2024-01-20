@@ -12,7 +12,7 @@ export const initialState: State = {
   mailSender: 'Senders Address',
 };
 
-export const reducer = (state: State = initialState, action: MailActionTypes): State => {
+ export const reducer = (state: State = initialState, action: MailActionTypes): State => {
   switch (action.type) {
     case SET_MAIL_CONTENT:
       console.log(action.payload);

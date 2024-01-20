@@ -191,3 +191,4 @@ export const EMAILBLOCK = [
     constant: true,
   },
 ];
+export default EMAILBLOCK

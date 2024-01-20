@@ -28,3 +28,4 @@ export const setMailSender = (sender: string): SetMailSenderAction => ({
   type: SET_MAIL_SENDER,
   payload: sender,
 });
+

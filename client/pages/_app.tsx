@@ -4,9 +4,9 @@ import { AuthProvider, SaasProvider } from '@saas-ui/react'
 import { Layout } from 'components/layout'
 import "../src/output.css"
 import theme from '../theme'
-import mailReducer from './mail/reducer';
-import {initialState} from "./mail/reducer"
-import store from "./mail/store"
+import mailReducer from '../reducer';
+import {initialState} from "../reducer"
+import store from "../store"
 import React, { createContext, useContext, useReducer, ReactNode } from 'react';
 
 

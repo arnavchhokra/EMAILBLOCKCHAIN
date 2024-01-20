@@ -1,10 +1,10 @@
 import React from 'react'
 import Web3 from "web3";
 import { useState, useEffect } from "react";
-import { EMAILBLOCK } from "../abi/abi";
+import { EMAILBLOCK } from "../../abi/abi";
 import forge from "node-forge";
-import { SET_MAIL_CONTENT, SET_MAIL_SENDER} from './mailActions';
-import  store from './store'
+import { SET_MAIL_CONTENT, SET_MAIL_SENDER} from '../../mailActions';
+import  store from '../../store'
 
 
 // Function to handle mouse leave

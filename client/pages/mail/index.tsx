@@ -17,9 +17,8 @@ import {
   CommandShortcut,
 } from "@/components/ui/command"
 
-
 import Mailcard from './Mailcard';
-import store from './store';
+import store from '../../store';
 
 
 interface WindowWithEthereum extends Window {
@@ -30,7 +29,7 @@ interface WindowWithEthereum extends Window {
 
 import Web3 from "web3";
 import { useState, useEffect } from "react";
-import { EMAILBLOCK } from "../abi/abi";
+import  EMAILBLOCK  from "../../abi/abi";
 import forge from "node-forge";
 
 import {useMail} from '../_app'; // Make sure to import the correct context
