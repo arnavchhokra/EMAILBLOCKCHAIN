@@ -24,7 +24,8 @@ const siteConfig = {
         variant: 'primary',
       },
     ],
-  }
+  },
+  logo: Logo,
 }
 
 export default siteConfig
