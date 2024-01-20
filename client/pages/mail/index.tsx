@@ -22,6 +22,9 @@ import Mailcard from './mailcard';
 import store from './store';
 
 
+interface WindowWithEthereum extends Window {
+  ethereum?: any;
+}
 
 
 
@@ -45,6 +48,10 @@ function Index() {
   const [recieverkey, setRecieverkey] = useState("");
   const [accounts, setAccounts] = useState([]);
   const [bodyencrypt, setBodyencrypt] = useState("");
+
+
+
+
 
 
 
