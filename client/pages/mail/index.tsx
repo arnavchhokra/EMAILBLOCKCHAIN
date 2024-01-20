@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import {
   ResizableHandle,
@@ -32,7 +33,7 @@ import forge from "node-forge";
 import {useMail} from '../_app'; // Make sure to import the correct context
 
 
-const index = ()=> {
+function Index() {
   const [reciever, setReciever] = useState("");
   const [subject, setSubject] = useState("");
   const [body, setBody] = useState("");
@@ -218,4 +219,4 @@ placeholder="Write the mail" style={{borderRadius:'5px', padding:'5px', height:'
   )
 }
 
-export default index
+export default Index
