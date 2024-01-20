@@ -1,6 +1,6 @@
 // rootReducer.ts
 import { combineReducers } from 'redux';
-import mailReducer, { MailState } from './mailReducers';
+import mailReducer, { MailState } from './reducer';
 
 export interface RootState {
   mail: MailState;

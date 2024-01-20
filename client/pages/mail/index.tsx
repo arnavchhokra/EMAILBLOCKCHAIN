@@ -16,9 +16,9 @@ import {
   CommandShortcut,
 } from "@/components/ui/command"
 
-import { Avatar, AvatarFallback, } from "@/components/ui/avatar"
 
 import Mailcard from './mailcard';
+import store from './store';
 
 
 
@@ -28,10 +28,8 @@ import Web3 from "web3";
 import { useState, useEffect } from "react";
 import { EMAILBLOCK } from "../abi/abi";
 import forge from "node-forge";
-import store from './store';
-import { Provider } from 'react-redux';
 
-import { useSelector } from 'react-redux';
+import {useMail} from '../_app'; // Make sure to import the correct context
 
 
 const index = ()=> {
@@ -46,6 +44,9 @@ const index = ()=> {
   const [recieverkey, setRecieverkey] = useState("");
   const [accounts, setAccounts] = useState([]);
   const [bodyencrypt, setBodyencrypt] = useState("");
+
+
+
 
 
   useEffect(() => {
@@ -143,8 +144,27 @@ const index = ()=> {
   };
 
 
-  const mailContent = useSelector((state) => state.mail.mailContent);
-  const mailSender = useSelector((state) => state.mail.mailSender);
+
+  const [mailContent, setLocalMailContent] = useState('Mail Content comes here');
+  const [mailSender, setLocalMailSender] = useState('Senders address');
+
+  useEffect(() => {
+    const unsubscribe = store.subscribe(() => {
+      // Manually retrieve values from the Redux state when it changes
+      const state = store.getState();
+      setLocalMailContent(state.mailContent);
+      setLocalMailSender(state.mailSender);
+    });
+
+    // Clean up the subscription when the component unmounts
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+
+
+
 
   return (
     <div style={{marginTop:'80px', borderTop:'1px solid grey', marginLeft:'7%', marginRight:'7%', borderLeft:'1px solid grey', borderRight:'1px solid grey', borderBottom:'1px solid grey'}}>
@@ -158,9 +178,6 @@ const index = ()=> {
       <ResizableHandle withHandle  />
       <ResizablePanel  style={{borderLeft:'1px solid grey'}} defaultSize={30}>
         <div style={{display:'flex', paddingLeft:'20px', alignItems:'center', paddingTop:'10px', gap:'20px', borderBottom:'1px solid grey', paddingBottom:'10px'}}>
-        <Avatar >
-        <AvatarFallback style={{borderRadius:'50px', padding:'20px', background:'#8952E0'}}>TM</AvatarFallback>
-        </Avatar>
         <div style={{display:'flex',justifyContent:'space-between', alignitems:'center',width:'100%', marginRight:'20px',}}>
           <span style={{fontWeight:'600', fontSize:'20px', paddingRight:'30%'}}>{mailSender}</span>
         </div>
@@ -176,7 +193,6 @@ value={reciever}
 name="reciever"
 
 onChange={(e) => setReciever(e.target.value)}  placeholder="Reciever's Wallet address" style={{borderRadius:'5px', padding:'5px', marginBottom:'20px'}}></input>
-
           <input
           style={{marginBottom:'20px'}}
         type="text"

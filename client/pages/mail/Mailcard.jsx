@@ -3,10 +3,8 @@ import Web3 from "web3";
 import { useState, useEffect } from "react";
 import { EMAILBLOCK } from "../abi/abi";
 import forge from "node-forge";
-import { useDispatch, useSelector } from 'react-redux';
-import { setMailContent, setMailSender } from './mailActions';
-
-
+import { SET_MAIL_CONTENT, SET_MAIL_SENDER} from './mailActions';
+import  store from './store'
 
 
 // Function to handle mouse leave
@@ -108,13 +106,17 @@ function Mailcard() {
     decryptMessages();
   }, [storedmails]);
 
-  const dispatch = useDispatch();
-  const { mailContent, mailSender } = useSelector((state) => state.mail);
 
   const clicked=(newContent, newSender) => {
     console.log(newContent)
-    dispatch(setMailContent(newContent));
-    dispatch(setMailSender(newSender));
+    try{
+      store.dispatch({type:SET_MAIL_CONTENT, payload:newContent});
+      store.dispatch({type:SET_MAIL_SENDER, payload:newSender});
+    }catch(err)
+    {
+      console.log(err)
+    }
+
   }
 
 
