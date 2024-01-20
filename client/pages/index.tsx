@@ -78,14 +78,22 @@ const Home: NextPage = () => {
   )
 }
 
+interface WindowWithEthereum extends Window {
+  ethereum?: any;
+}
+
+
 const HeroSection: React.FC = () => {
   const [address, setaddress] = useState("");
   const [web3, setWeb3] = useState(null);
 
+  const win = window as WindowWithEthereum;
+
+
   const connectToWeb3 = async () => {
-    if (window.ethereum) {
-      await window.ethereum.enable();
-      const web3 = new Web3(window.ethereum);
+    if (typeof win.ethereum !== "undefined") {
+      await win.ethereum.enable();
+      const web3 = new Web3(win.ethereum);
       setWeb3(web3);
       const accounts = await web3.eth.getAccounts();
       setaddress(accounts[0]);
