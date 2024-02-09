@@ -11,9 +11,6 @@ Threemail is a decentralized application (dApp) designed for secure communicatio
 6. [Development](#development)
 7. [Smart Contracts](#smart-contracts)
 8. [Security Considerations](#security-considerations)
-9. [Contributing](#contributing)
-10. [License](#license)
-11. [Images](#images)
 
 ## Introduction
 Threemail aims to provide a decentralized communication platform for blockchain wallet holders, ensuring privacy and security through asymmetric encryption. It enables users to exchange messages securely without relying on centralized servers.
