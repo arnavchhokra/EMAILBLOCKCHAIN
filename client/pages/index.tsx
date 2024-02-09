@@ -88,20 +88,26 @@ const HeroSection: React.FC = () => {
   const [address, setaddress] = useState("");
   const [web3, setWeb3] = useState<Web3 | null>(null); // Corrected state type
   const connectToWeb3 = async () => {
-
-    if (typeof window !== "undefined") {
-      const win = window as WindowWithEthereum;
-      if (win.ethereum) {
+  if (typeof window !== "undefined") {
+    console.log("Window is defined");
+    const win = window as WindowWithEthereum;
+    if (win.ethereum) {
+      console.log("MetaMask is installed");
       await win.ethereum.enable();
       const web3 = new Web3(win.ethereum);
       setWeb3(web3);
       const accounts = await web3.eth.getAccounts();
       setaddress(accounts[0]);
-      window.location.href = "/mail";}
+      window.location.href = "/mail";
     } else {
+      console.log("MetaMask is not installed");
       alert("Please install MetaMask to use this application");
     }
-  };
+  } else {
+    console.log("Window is not defined");
+    alert("Please use a browser to access this application");
+  }
+};
 
   return (
     <Box position="relative" overflow="hidden">
