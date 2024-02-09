@@ -151,15 +151,6 @@ Connect                </ButtonLink>
           >
             <FallInPlace delay={1}>
               <Box overflow="hidden" height="100%">
-                <Image
-                  src="/static/screenshots/list.png"
-                  layout="fixed"
-                  width={1200}
-                  height={762}
-                  alt="Screenshot of a ListPage in Saas UI Pro"
-                  quality="75"
-                  priority
-                />
               </Box>
             </FallInPlace>
           </Box>
